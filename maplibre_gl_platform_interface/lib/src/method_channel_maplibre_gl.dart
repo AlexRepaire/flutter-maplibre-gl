@@ -1056,6 +1056,14 @@ class MapLibreMethodChannel extends MapLibrePlatform {
   }
 
   @override
+  Future<void> setLayersVisibility(List<String> layerIds, bool visible) async {
+    await _channel.invokeMethod('layer#setVisibilityBatch', <String, dynamic>{
+      'layerIds': layerIds,
+      'visible': visible,
+    });
+  }
+
+  @override
   Future<bool?> getLayerVisibility(String layerId) async {
     try {
       final result = await _channel.invokeMethod(
